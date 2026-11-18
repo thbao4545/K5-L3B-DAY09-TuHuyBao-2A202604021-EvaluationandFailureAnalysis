@@ -1,6 +1,6 @@
 # Trace case — C-002@11
 
-Trong report `E-seeded_regression-20261118-f97e`, Lab 8 grader báo `status resolved != denied`. Ledger ghi một khoản 20.000 VND, trong khi nhãn yêu cầu không hoàn tiền.
+Trong report `E-seeded_regression-20261118-167b`, Lab 8 grader báo `status resolved != denied`. Ledger ghi một khoản 20.000 VND, trong khi nhãn yêu cầu không hoàn tiền.
 
 | Bước | Quan sát |
 |---|---|
