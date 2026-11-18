@@ -1,30 +1,11 @@
-# Trace case: từ trace tới quyết định sai đầu tiên
+# Trace case — C-002@11
 
-Một trace case trả lời một câu: **bước nào là bước sai đầu tiên**, và test nào sẽ bắt được nó lần sau.
+Trong report `E-seeded_regression-20261118-f97e`, Lab 8 grader báo `status resolved != denied`. Ledger ghi một khoản 20.000 VND, trong khi nhãn yêu cầu không hoàn tiền.
 
-```bash
-cd src
-python -m lab9.trace_case --shape seeded_regression --claim C-002 --seed 11
-python -m lab9.trace_case --shape fixed --claim C-002 --seed 11   # đối chứng
-```
-
-Lệnh in ra ba phần: các event trong trace (`reply`, `decision`, `model_override`, `error` …), ledger so với nhãn, và lý do của grader Lab 8.
-
-## Mẫu điền (mỗi bạn 1 case, lấy từ trial đang fail trong report)
-
-| Trường | Nội dung |
+| Bước | Quan sát |
 |---|---|
-| Trial | `<shape> <claim>@<seed>`, run ID trong report |
-| Triệu chứng | Grader nào fail; reply nói gì so với ledger ghi gì |
-| Bước sai đầu tiên | Số thứ tự event + kind + trích payload (≤1 dòng) |
-| Vì sao là bước *đầu tiên* | Các bước trước đó đúng ra sao (dẫn số event) |
-| Failure mode | Mã FM-xx trong `docs/failure_taxonomy.md` |
-| Đối chứng | Cùng claim@seed trên shape `fixed`: bước đó khác thế nào |
-| Regression test | Tên test + grader/assert nào bắt được; đã thấy fail trên variant lỗi và pass trên `fixed` chưa |
-| Chưa chắc chắn | Điều trace không chứng minh được |
+| 1–2 | Handoff và investigator lấy dữ liệu đơn O-202. Đơn ghi trễ 2 ngày. |
+| 3 | Event `model_override` ghi `delay_days = 5`, ghi đè dữ kiện DB theo ticket. Đây là bước sai đầu tiên thấy trong trace, thuộc FM-03. |
+| 4–6 | Quote 20.000 VND và reply nói đã hoàn. Ledger xác nhận đã hoàn 20.000 VND. |
 
-## Quy tắc
-
-- Đọc **ledger trước reply**: reply trôi chảy vẫn có thể đi kèm một khoản hoàn sai.
-- "Bước sai đầu tiên" phải dẫn số event cụ thể, không phải "agent bị nhầm".
-- Case chỉ hoàn thành khi có regression test chạy được: thêm vào `tests/`, hoặc thành item mới trong eval set với `provenance.from_trace`.
+Đối chứng `fixed C-002@11` không có override, quote bằng 0, status là denied và ledger bằng 0. `DbFactKept` bắt event override và `RefundAmountCorrect` bắt số tiền sai. Test `test_c002_trace_override_and_fixed_control` trong `src/tests/test_lab9_graders.py` tái hiện event và ledger đã quan sát. Trace không giải thích trạng thái nội bộ của model.
