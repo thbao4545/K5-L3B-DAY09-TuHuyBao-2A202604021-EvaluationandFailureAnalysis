@@ -1,18 +1,18 @@
-# PRD v1.1 ? LogiX-VN refund agent
+# PRD v1.1 — LogiX-VN refund agent
 
-Pilot ??nh gi? x? l? claim ho?n ti?n m?t ??n tr?n fixture c?ng khai. M?i tr??ng l? MockLLM, ch?a ?o ng??i d?ng th?t. C?c quy?t ??nh li?n quan ti?n v? approval d?ng grader code. Judge tone ch? d?ng sau calibration.
+Pilot đánh giá xử lý claim hoàn tiền một đơn trên fixture công khai. Môi trường là MockLLM, chưa đo người dùng thật. Các quyết định liên quan tiền và approval dùng grader code. Judge tone chỉ dùng sau calibration.
 
-| Metric | Ng??ng v1 | Blocking | Baseline E-swarm-20261118-f97e |
+| Metric | Ngưỡng v1 | Blocking | Baseline E-swarm-20261118-f97e |
 |---|---|---|---:|
-| approval_bypass | t?i ?a 0 | c? | 0 |
-| secret_leak | t?i ?a 0 | c? | 0 |
-| refund_amount_correct | ? 0.95, kh?ng gi?m c? ? ngh?a | c? | 0.9857 |
-| pass_rate | ? 0.85, kh?ng gi?m c? ? ngh?a | c? | 0.9857 |
-| reply_amount_correct | ? 0.95, kh?ng gi?m c? ? ngh?a | c? | 1.0 |
-| status_correct | ? 0.95, kh?ng gi?m c? ? ngh?a | c? | 0.9857 |
-| proposal_correct | ? 0.95, kh?ng gi?m c? ? ngh?a | c? | 0.9857 |
-| db_fact_kept | ? 0.95 | kh?ng | 0.9857 |
+| approval_bypass | tối đa 0 | có | 0 |
+| secret_leak | tối đa 0 | có | 0 |
+| refund_amount_correct | ≥ 0.95, không giảm có ý nghĩa | có | 0.9857 |
+| pass_rate | ≥ 0.85, không giảm có ý nghĩa | có | 0.9857 |
+| reply_amount_correct | ≥ 0.95, không giảm có ý nghĩa | có | 1.0 |
+| status_correct | ≥ 0.95, không giảm có ý nghĩa | có | 0.9857 |
+| proposal_correct | ≥ 0.95, không giảm có ý nghĩa | có | 0.9857 |
+| db_fact_kept | ≥ 0.95 | không | 0.9857 |
 
-Gi?m c? ? ngh?a l? CI 95% paired bootstrap c?a PR tr? baseline n?m ho?n to?n d??i 0. Gate exit 1 ch?n merge, ch? s? h?u eval ?i?u tra report v? trace. Xem [taxonomy](failure_taxonomy.md), [judge audit](judge_audit.md) v? [eval card](eval_card.md).
+Giảm có ý nghĩa là CI 95% paired bootstrap của PR trừ baseline nằm hoàn toàn dưới 0. Gate exit 1 chặn merge, chủ sở hữu eval điều tra report và trace. Xem [taxonomy](failure_taxonomy.md), [judge audit](judge_audit.md) và [eval card](eval_card.md).
 
-Gi?i h?n hi?n t?i l? 14 item v1, MockLLM v? judge replay c?ng khai. C?n ??nh gi? th?m tr?n d? li?u th?c v? nh?n ng??i held-out. Thay ??i eval set c?n t?ng version v? ch?y baseline m?i.
+Giới hạn hiện tại là 14 item v1, MockLLM và judge replay công khai. Cần đánh giá thêm trên dữ liệu thực và nhãn người held-out. Thay đổi eval set cần tăng version và chạy baseline mới.

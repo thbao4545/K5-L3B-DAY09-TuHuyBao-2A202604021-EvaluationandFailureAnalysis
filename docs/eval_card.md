@@ -1,6 +1,6 @@
-# Eval card ? LogiX-VN refund agent
+# Eval card — LogiX-VN refund agent
 
-Baseline E-swarm-20261118-f97e, fixed E-fixed-20261118-f97e, regression E-seeded_regression-20261118-f97e. Eval set SHA f97e8e0654f6, v1, 14 item ? 5 seed (11, 22, 33, 44, 55), ngu?n Lab 8 public v? nh?n t?ch ri?ng. Runtime MockLLM, metric spec v1.
+Baseline `E-swarm-20261118-f97e`, fixed `E-fixed-20261118-f97e`, regression `E-seeded_regression-20261118-f97e`. Eval set SHA `f97e8e0654f6`, v1, 14 item × 5 seed (11, 22, 33, 44, 55), nguồn Lab 8 public và nhãn tách riêng. Runtime MockLLM, metric spec v1.
 
 | Metric | Swarm | Fixed | Seeded regression |
 |---|---:|---:|---:|
@@ -14,10 +14,10 @@ Baseline E-swarm-20261118-f97e, fixed E-fixed-20261118-f97e, regression E-seeded
 | pass_5 | 0.9286 | 1.0 | 0.7143 |
 | cost_per_success | 49.567 | 48.7157 | 81.202 |
 
-Gate ch?p nh?n fixed v? ch?n seeded_regression ? pass_rate. V?i pass_rate, paired bootstrap ? fixed?baseline = +0.014, CI 95% [0.000, 0.043]. C?c ng??ng v? metric ??y ?? n?m trong config/metric_spec.yaml.
+Gate chấp nhận fixed và chặn seeded_regression ở pass_rate. Với pass_rate, paired bootstrap Δ fixed−baseline = +0.014, CI 95% [0.000, 0.043]. Các ngưỡng đầy đủ nằm trong `config/metric_spec.yaml`.
 
-Judge tone ??t ?=0.757, P=0.857, R=0.800. Helpful kh?ng ??t ? v? recall. Xem [judge audit](judge_audit.md). Case [C-002@11](trace_case.md) ghi nh?n event ??u ti?n l?m sai d? ki?n.
+Judge tone đạt κ=0.757, P=0.857, R=0.800. Helpful không đạt κ và recall. Xem [judge audit](judge_audit.md). [C-002@11](trace_case.md) ghi nhận event đầu tiên làm sai dữ kiện.
 
-V2 d?ng E-swarm-20261118-c9eb, SHA c9ebfdeaaad0, 28 item ? 5 seed. Baseline pass_hat_5=0.8929. So s?nh A/A gi?a hai b? seed tr?n MockLLM cho ?=0 ? c?c metric ???c in. Ch?n s?n 0.80 cho pass_hat_5, ngo?i d?i nhi?u quan s?t ???c. Slice money_movement b?t slice_regression. Slice adversarial theo d?i c?c claim t?n c?ng. Bug ch? xu?t hi?n ? 1/3 seed kh?ng ???c ph?t hi?n ?n ??nh v?i 5 seed.
+V2 dùng `E-swarm-20261118-c9eb`, SHA `c9ebfdeaaad0`, 28 item × 5 seed. Baseline pass_hat_5=0.8929. So sánh A/A giữa hai bộ seed trên MockLLM cho Δ=0 ở các metric được in. Sàn pass_hat_5 là 0.80, ngoài dải nhiễu quan sát được. Slice money_movement bắt slice_regression. Slice adversarial theo dõi claim tấn công. Bug chỉ xuất hiện ở 1/3 seed không được phát hiện ổn định với 5 seed.
 
-Gi?i h?n g?m MockLLM, ch? 14 item v1, judge replay c?ng khai v? ch?a ?o ng??i d?ng th?t. Ch? s? h?u eval c?n ?i?u tra m?i gate exit 1. Khi thay ??i t?p item, t?ng eval-set version v? t?o baseline m?i.
+Giới hạn gồm MockLLM, 14 item v1, judge replay công khai và chưa đo người dùng thật. Chủ sở hữu eval cần điều tra mỗi gate exit 1. Khi thay đổi tập item, tăng eval-set version và tạo baseline mới.
