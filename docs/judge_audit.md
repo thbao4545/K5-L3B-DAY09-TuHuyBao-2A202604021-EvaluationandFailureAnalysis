@@ -1,17 +1,20 @@
 # Judge audit
 
-Chạy: `python -m lab9.judge --csv <file> --audit 5`
+Ch?y t? src b?ng l?nh judge v?i CSV tone v? helpful. PASS/FAIL theo nh?n trong CSV.
 
-| Tiêu chí | n | κ | Precision | Recall | Đạt FLOORS (κ≥0.6, P≥0.8, R≥0.7)? | Quyết định |
-|---|---|---|---|---|---|---|
-| tone_ok | | | | | | dùng / loại |
-| helpful | | | | | | dùng / loại |
+| Ti?u ch? | n | ? | Precision | Recall | TP / FP / FN / TN | Quy?t ??nh |
+|---|---:|---:|---:|---:|---|---|
+| tone_ok | 100 | 0.757 | 0.857 | 0.800 | 24 / 4 / 6 / 66 | D?ng cho tone |
+| helpful | 100 | 0.375 | 1.000 | 0.300 | 9 / 0 / 21 / 70 | Lo?i kh?i gate |
 
-## ≥5 case audit thủ công
-| # | Case | Judge nói | Người nói | Ai đúng? | Ghi chú |
-|---|---|---|---|---|---|
-| 1 | | | | | |
+Ng??ng l? ? ? 0.6, precision ? 0.8 v? recall ? 0.7. Rogan?Gladen cho t? l? l?i hi?u ch?nh 0.30 ? c? hai b?.
 
-## Kết luận
-- Tiêu chí bị loại và lý do (dẫn ma trận nhầm lẫn).
-- Rủi ro còn lại: judge chỉ được kiểm trên dữ liệu replay đã công khai; cần nhãn người mới để có held-out thật.
+| Case | Judge | Ng??i | Nh?n x?t v? h?nh ??ng ?? xu?t |
+|---|---|---|---|
+| H-008 | PASS | FAIL | ?nha? c? th? qu? th?n m?t. B? sung v? d? v? m?c ?? th?n m?t. |
+| H-017 | PASS | FAIL | L?m r? c?ch x?ng h? v? c?ch k?t c?u ???c ph?p. |
+| H-029 | PASS | FAIL | ?kh?ng c?n nh?n th?m? c? th? thi?u thi?n ch?. L?m r? ti?u ch? l?ch s?. |
+| H-042 | FAIL | PASS | C?u c? th?ng tin th?i gian v? c?ch k?t l?ch s?. Th?m v? d? PASS t??ng t?. |
+| H-051 | FAIL | PASS | Quy ??nh r? vi?c d?ng thu?t ng? ti?ng Anh ?refund?. |
+
+Nh?n x?t l? gi? thuy?t t? c?u tr? l?i v? nh?n, c?n ng??i g?n nh?n x?c minh tr??c khi s?a rubric. D? li?u l? replay c?ng khai, c?n t?p held-out v?i nh?n ng??i m?i.
